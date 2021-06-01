@@ -1,0 +1,7 @@
+! vid - toggle video mode on and off !
+
+7:w"E   ! if the current video mode is set to zero (no video mode) !
+ 6,7:w  ! set to video mode with 6 lines of commands at the bottom !
+|       ! else                                                     !
+ 0,7:w  ! turn off video mode                                      !
+'       ! end if                                                   !

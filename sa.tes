@@ -1,0 +1,7 @@
+! sa - toggle SEEALL mode !
+
+3:w"E   ! if SEEALL mode is off !
+ -1,3:w ! turn on SEEALL mode   !
+|       ! else                  !
+ 0,3:w  ! turn off SEEALL mode  !
+'       ! end if                !

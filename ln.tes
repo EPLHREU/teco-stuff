@@ -1,0 +1,16 @@
+! ln - show the current line number !
+
+[p[l      ! save the p and l registers      !
+.up       ! save the current position       !
+1ul       ! set line counter to 1           !
+<         ! start loop                      !
+ -1l      ! move a line back                !
+ ."e      ! if we are at the start          !
+  1;      ! exit from the loop              !
+ |        ! else                            !
+  ql+1ul  ! increment the line conuter by 1 !
+ '        ! end of if                       !
+>         ! end of loop                     !
+qpj       ! return to where we started      !
+ql=       ! print the line number           !
+]p]l      ! restore the p and l registers   !

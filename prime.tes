@@ -1,0 +1,63 @@
+! prime - calculate prime numbers including and below a given number !
+
++0uc       ! load prefix into c         !
+qc"e       ! if c is 0 (not specified)  !
+ 100uc     ! set it to 100 by default   !
+'          ! end if                     !
+qc-3/2uc   ! modify c to fit with algo  !
+
+[p  ! save p, used for potential prime      !
+[t  ! save t, used for divisor test         !
+[f  ! save f, used for prime flag           !
+[s  ! save s, used for square test          !
+[d  ! save d, used for divisor              !
+[m  ! save m, used for multiplication check !
+
+hk      ! clear buffer               !
+@i:2
+3:      ! setup first primes         !
+2=      ! print out first two primes !
+3=
+3up     ! load first number to test !
+
+qc<      ! test up to count                  !
+ qp+2up  ! increment number to test          !
+ j       ! jump to start                     !
+ <       ! loop to test all numbers          !
+  \ut    ! store current testing number in t !
+  0uf    ! set prime flag to true            !
+
+           ! check if greater than sqrt of number               !
+  qt*qtus  ! load square of testing number into s               !
+  qp-qs"l  ! if p<s, meaning it's not a valid test              !
+   1;      ! exit from iteration, as there are no more divisors !
+  |        ! else                                               !
+
+   qp/qtud  ! store p/t in d                                 !
+   qd*qtum  ! store d*t in m to test if whole division       !
+   qm-qp"e  ! if m equals d, therefore the divison was whole !
+    1uf     ! set flag f to false                            !
+    1;      ! break out of loop, as it's not prime           !
+
+   '  ! end division test !
+  '   ! end square test   !
+
+ l  ! move to next test number  !
+ >  ! end testing a number loop !
+
+ qf"e     ! if flag is true, number is prime !
+  zj      ! go to bottom of buffer           !
+  @i:
+:  ! insert newline                   !
+  qp\     ! insert newly found prime number  !
+  qp=     ! print prime number               !
+ '        ! end prime test                   !
+
+>  ! end main loop !
+
+]p  ! restore p !
+]t  ! restore t !
+]f  ! restore f !
+]s  ! restore s !
+]d  ! restore d !
+]m  ! restore m !

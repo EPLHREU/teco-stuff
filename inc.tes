@@ -1,0 +1,25 @@
+! increment - increment or decrement the current number !
+
++0un  ! load prefix into n  !
+qn"e  ! if zero             !
+ 1un  ! set to 1 as default !
+'     ! end if              !
+
+0a"D  ! make sure we start on a number, or quit !
+ 
+ .up  ! save pre-macro position !
+ 
+ <        ! start loop                       !
+  0a"D    ! if current character is a number !
+  r       ! go left                          !
+  | 1;'>  ! else, end loop                   !
+ c        ! move right one char              !
+ 
+ .us     ! save start position          !
+ qn+\un  ! save number, adding prefix   !
+ .ue     ! save end position            !
+ qs,qed  ! delete old number            !
+ qn\     ! write number to buffer       !
+ qpj     ! return to pre-macro position !
+
+' ! end of macro !

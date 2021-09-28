@@ -1,0 +1,68 @@
+! match - jump to (or return the position of) the matching bracket ! 
+
+! -usage-                                                !
+! 0 prefix (default) : jump to the matching bracket      !
+! 1 prefix : return the position of the matching bracket !
+! -1 prefix : force reverse direction                    !
+
+! -registers used- !
+! o : options      !
+! c : count        !
+! r : return       !
+! p : position     !
+! s : start symbol !
+! e : end symbol   !
+! d : direction    !  
+
+[o[c[r[f[s[e[d  ! save resisters !
+
++0Uo  ! load prefix into options !
+
+1Uc   ! set count to 1 by default   !
+.Up   ! store the starting position !
+.Ur   ! store the return position   !
+0aUs  ! store the current char      !
+
+1<
+ Qs-^^("= ^^)Ue 1Ud  1;'  ! ( -> )             !
+ Qs-^^)"= ^^(Ue -1Ud 1;'  ! ( <- )             !
+ Qs-^^["= ^^]Ue 1Ud  1;'  ! [ -> ]             !
+ Qs-^^]"= ^^[Ue -1Ud 1;'  ! [ <- ]             !
+ Qs-^^{"= ^^}Ue 1Ud  1;'  ! { -> }             !
+ Qs-^^}"= ^^{Ue -1Ud 1;'  ! { <- }             !
+ Qs-^^<"= ^^>Ue 1Ud  1;'  ! < -> >             !
+ Qs-^^>"= ^^<Ue -1Ud 1;'  ! < <- >             !
+ Qs-^^""= ^^"Ue 1Ud  1;'  ! " -> "             !
+ Qs-^^""= ^^"Ue -1Ud 1;'  ! " <- "             !
+ Qs-^^'"= ^^'Ue 1Ud  1;'  ! ' -> '             !
+ Qs-^^'"= ^^'Ue -1Ud 1;'  ! ' <- '             !
+ 0Ud                      ! set direction to 0 !
+>
+
+Qo+1"=  ! if option is -1     !
+ -1Ud'  ! set direction to -1 !
+
+Qd"N         ! if direction is not 0 (therefore valid)       !
+<            ! main loop                                     !
+ Qd:c"N      ! if we can move in the right direction         !
+  0a-Qe"=    ! if the current char matches the ending symbol !
+   Qc-1Uc    ! decrement count                               !
+   Qc"=      ! if count is zero                              !
+    .Ur      ! store current location in r                   !
+    Qo-1"=   ! if option is 1                                !
+     Qpj'    ! jump back to very start                       !
+    1;       ! quit loop                                     !
+   '
+  |          ! if current char is not the ending symbol        !
+   0a-Qs"=   ! if the current char matches the starting symbol !
+    Qc+1Uc'  ! increment counter                               !
+  '
+ |     ! if we can't move       !
+  Qpj  ! jump back to the start !
+  1;'  ! exit from main loop    !
+>      ! end of main loop       !
+'
+
+Qr  ! return matching bracket position !
+
+]d]e]s]f]r]c]o  ! re-load saved registers !

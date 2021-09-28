@@ -1,0 +1,9 @@
+if [ $# -eq 0 ]; then
+	tecoc teco
+else
+	if [ -f $1 ]; then
+		tecoc teco $1
+	else
+		tecoc make $1
+	fi
+fi

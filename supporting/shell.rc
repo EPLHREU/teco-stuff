@@ -1,0 +1,7 @@
+export TEC_LIBRARY="~/teco/lib/"
+export TEC_INIT="$~/teco/teco.ini"
+export TEC_MEMORY="$~/teco/teco.mem"
+export VISUAL=t
+export EDITOR=t
+export LESSEDIT="%E %f"
+export LESS='-RS#3NM~g'

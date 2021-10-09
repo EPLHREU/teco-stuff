@@ -1,0 +1,4 @@
+l   ! go to start of next line !
+@i:
+:   ! insert new line          !
+-l  ! go back up to new line   !

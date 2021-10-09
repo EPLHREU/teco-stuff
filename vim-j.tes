@@ -1,0 +1,7 @@
+[l[s    ! save registers                               !  
+.ul     ! save current position in line                !
+0l      ! move to start of line                        !
+.us     ! save position of start of line               !
+l       ! move down to start of next line              !
+ql-qsc  ! move forward the offset you were in the line !
+]s]l    ! restore registers                            !

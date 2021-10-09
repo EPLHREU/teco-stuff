@@ -6,5 +6,4 @@ export EDITOR=t
 export LESSEDIT="%E %f"
 export LESS='-RS#3NM~g'
 autoload edit-command-line; zle -N edit-command-line
-autoload edit-command-line; zle -N edit-command-line
 bindkey "^[^[" edit-command-line
